@@ -28,6 +28,12 @@
       <Row>
         <Col :span="5" v-show="isShowLeftNavBar">
         <Menu active-name="1-2" width="auto" :open-names="['1']">
+          <MenuItem name="4">
+            <Icon type="ios-folder-outline"></Icon>
+            <router-link to="/book-classification">
+              分类编辑
+            </router-link>
+          </MenuItem>
           <Submenu name="1">
             <template slot="title">
               <Icon type="ios-navigate" :size="14"></Icon>
@@ -66,7 +72,9 @@
             <BreadcrumbItem>iView</BreadcrumbItem>
           </Breadcrumb>
         </div>
-        <div class="layout-content-main">Content</div>
+        <div class="layout-content-main">
+          <router-view></router-view>
+        </div>
         </Col>
       </Row>
     </div>
@@ -122,7 +130,7 @@
         font-size: 16px;
         color: #fff;
       }
-      .ivu-icon{
+      .ivu-icon {
         color: #fff;
       }
     }
@@ -149,7 +157,8 @@
     }
 
     .layout-content-main {
-      padding: 10px;
+      padding: 10px 15px 0;
+      height: calc(100% - 61px);
     }
 
     .layout-copy {
