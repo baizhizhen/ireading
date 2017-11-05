@@ -29,35 +29,20 @@
         <Col :span="5" v-show="isShowLeftNavBar">
         <Menu active-name="1-2" width="auto" :open-names="['1']">
           <MenuItem name="4">
-            <Icon type="ios-folder-outline"></Icon>
-            <router-link to="/book-classification">
-              分类编辑
-            </router-link>
+            <Icon type="ios-cloud-outline"></Icon>
+            书库
           </MenuItem>
           <Submenu name="1">
             <template slot="title">
-              <Icon type="ios-navigate" :size="14"></Icon>
-              Item 1
+              <Icon type="ios-folder-outline"></Icon>
+              书架
             </template>
-            <MenuItem name="1-1">Option 1</MenuItem>
-            <MenuItem name="1-2">Option 2</MenuItem>
-            <MenuItem name="1-3">Option 3</MenuItem>
-          </Submenu>
-          <Submenu name="2">
-            <template slot="title">
-              <Icon type="ios-keypad" :size="14"></Icon>
-              Item 2
-            </template>
-            <MenuItem name="2-1">Option 1</MenuItem>
-            <MenuItem name="2-2">Option 2</MenuItem>
-          </Submenu>
-          <Submenu name="3">
-            <template slot="title">
-              <Icon type="ios-analytics" :size="14"></Icon>
-              Item 3
-            </template>
-            <MenuItem name="3-1">Option 1</MenuItem>
-            <MenuItem name="3-2">Option 2</MenuItem>
+            <MenuItem name="1-1">
+              <router-link to="/book-classification">分类</router-link>
+            </MenuItem>
+            <MenuItem name="1-2">
+              <router-link to="/book-list">图书</router-link>
+            </MenuItem>
           </Submenu>
         </Menu>
         </Col>
@@ -142,6 +127,9 @@
 
     .layout-breadcrumb {
       padding: 10px 15px 0;
+      .ivu-btn {
+        padding-left: 5px;
+      }
     }
 
     .layout-content {
