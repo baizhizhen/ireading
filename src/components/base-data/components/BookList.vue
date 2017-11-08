@@ -5,7 +5,7 @@
         <Icon type="plus-circled"></Icon>
         添加
       </el-button>
-      <el-button style="font-size: 12px;" type="text">
+      <el-button style="font-size: 12px;" type="text" @click.native.prevent="deleteSelectRows(scope)">
         <Icon type="minus-circled"></Icon>
         删除
       </el-button>
@@ -16,7 +16,7 @@
         v-model="filterText">
       </el-input>
     </div>
-    <el-table :data="tableData"
+    <el-table :data="tableData" highlight-current-row
               border>
       <el-table-column type="selection"
                        width="55">
@@ -45,27 +45,38 @@
         <template slot-scope="scope">
           <el-button
             type="text"
-            size="small">
+            size="small" @click.native.prevent="deleteRow(scope.$index, tableData)">
             删除
           </el-button>
           <el-button
             type="text"
-            size="small">
+            size="small" @click="edit()">
             编辑
           </el-button>
           <el-button
             type="text"
-            size="small">
+            size="small" @click="read()">
             阅读
           </el-button>
           <el-button
             type="text"
-            size="small">
+            size="small" @click="desc(scope.$index, tableData)">
             查看
           </el-button>
         </template>
       </el-table-column>
     </el-table>
+    <el-dialog
+    title="查看"
+    :visible.sync="dialogVisible"
+    width="50%"
+    :before-close="handleClose">
+    <span>{{book}}</span>
+    <span slot="footer" class="dialog-footer">
+      <el-button @click="dialogVisible = false">取 消</el-button>
+      <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+    </span>
+    </el-dialog>
   </div>
 </template>
 <script>
@@ -74,10 +85,33 @@
   export default {
     data () {
       return {
-        tableData: mockData.getBookList()
+        tableData: mockData.getBookList(),
+        dialogVisible: false,
+        book: ''
       }
     },
-    methods: {}
+    methods: {
+      deleteRow (index, rows) {
+        rows.splice(index, 1)
+      },
+      edit () {
+        console.log('edit')
+      },
+      read () {
+        console.log('read')
+      },
+      desc (index, rows) {
+        this.dialogVisible = !this.dialogVisible
+        this.book = rows[index]
+      },
+      handleClose (done) {
+        this.$confirm('确认关闭？')
+          .then(_ => {
+            done()
+          })
+          .catch(_ => {})
+      }
+    }
   }
 </script>
 <style lang="scss" scoped>
